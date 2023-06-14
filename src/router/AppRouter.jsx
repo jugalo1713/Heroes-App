@@ -3,18 +3,20 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 import { HeroesApp } from '../HeroesApp';
 import { DCPage, MarvelPage, HeroPage, SearchPage } from '../heroes/pages';
 import HomePage from '../auth/pages/HomePage';
+import { PrivateRoutes } from './PrivateRoutes';
+import { PublicRoutes } from './PublicRoutes';
 
 export const AppRouter = () => {
     return createBrowserRouter(
         [
             {
-                path: "/",
-                element: <HeroesApp />,
-                children: childrenHeroesRoutes,
+                path: "/login",
+                element: <PublicRoutes><LoginPage /></PublicRoutes>
             },
             {
-                path: "/login",
-                element: <LoginPage />
+                path: "/",
+                element: <PrivateRoutes><HeroesApp /></PrivateRoutes>,
+                children: childrenHeroesRoutes,
             },
         ]);
 }
